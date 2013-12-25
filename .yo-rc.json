@@ -1,11 +1,11 @@
 {
   "generator-bbb": {
-    "name": "squidtree-backbone",
-    "testFramework": "jasmine",
+    "name": "",
+    "testFramework": "qunit",
     "moduleStyle": "amd",
     "indent": {
       "style": "space",
-      "size": 4
+      "size": 2
     },
     "paths": {
       "base": ".",
