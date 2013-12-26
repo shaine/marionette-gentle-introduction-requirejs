@@ -1,9 +1,9 @@
 define(function() {
-	'use strict';
+    'use strict';
 
-	/* return an array of specs to be run */
-	return {
-		specs: ['spec/exampleTest'
-		]
-	};
+    /* return an array of specs to be run */
+    return {
+        specs: ['spec/exampleTest'
+        ]
+    };
 });
