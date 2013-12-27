@@ -29,9 +29,9 @@ module.exports = function (grunt) {
         // watch list
         watch: {
 
-            compass: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass']
+            less: {
+                files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+                tasks: ['less:dev']
             },
 
             livereload: {
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
         // open app and test page
         open: {
             server: {
-                path: 'http://localhost:<%= express.options.port %>'
+                path: 'http://squidtree-backbone.ubervorrat.lan'
             }
         },
 
@@ -129,21 +129,24 @@ module.exports = function (grunt) {
         },
 
 
-        // compass
-        compass: {
+        // less
+        less: {
             options: {
-                sassDir: '<%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
-                imagesDir: '<%= yeoman.app %>/images',
-                javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/styles/fonts',
-                importPath: 'app/bower_components',
-                relativeAssets: true
+                paths: [
+                    '<%= yeoman.app %>/bower_components/'
+                ]
             },
-            dist: {},
-            server: {
+            dev: {
+                files: {
+                    '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+                }
+            },
+            dist: {
                 options: {
-                    debugInfo: true
+                    compress: true
+                },
+                files: {
+                    '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.less'
                 }
             }
         },
@@ -294,7 +297,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'compass:server',
+            'less:dev',
             'connect:testserver',
             'express:dev',
             'exec',
@@ -308,7 +311,7 @@ module.exports = function (grunt) {
         'clean:server',
         'createDefaultTemplate',
         'handlebars',
-        'compass',
+        'less:dev',
         'connect:testserver',
         'exec:mocha'
     ]);
@@ -316,7 +319,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'createDefaultTemplate',
         'handlebars',
-        'compass:dist',
+        'less:dist',
         'useminPrepare',
         'requirejs',
         'imagemin',
