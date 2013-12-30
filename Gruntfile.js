@@ -133,7 +133,8 @@ module.exports = function (grunt) {
         less: {
             options: {
                 paths: [
-                    '<%= yeoman.app %>/bower_components/'
+                    '<%= yeoman.app %>/bower_components/',
+                    '<%= yeoman.app %>/styles/partials/'
                 ]
             },
             dev: {
