@@ -7,10 +7,10 @@ function( Backbone ) {
     /* Return a model class definition */
     return Backbone.Model.extend({
         initialize: function() {
-            console.log("initialize a Contact model");
+            console.log('initialize a Contact model');
         },
 
-        defaults: {},
+        defaults: {}
 
     });
 });

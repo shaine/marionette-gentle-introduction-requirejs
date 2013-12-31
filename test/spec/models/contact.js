@@ -4,7 +4,7 @@
     var root = this;
 
     root.define([
-        'models/contact'
+            'models/contact'
         ],
         function( Contact ) {
 
@@ -12,11 +12,7 @@
 
                 it('should be an instance of Contact Model', function () {
                     var contact = new Contact();
-                    expect( contact ).to.be.an.instanceof( Contact );
-                });
-
-                it('should have more test written', function(){
-                    expect( false ).to.be.ok;
+                    expect( contact ).to.be.an.instanceOf( Contact );
                 });
             });
 
