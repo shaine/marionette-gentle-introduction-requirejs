@@ -36,16 +36,12 @@ module.exports = function (grunt) {
 
             livereload: {
                 files: [
-
                     '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,**/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,**/}*.js',
-                    '{.tmp,<%= yeoman.app %>}/templates/{,**/}*.hbs',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-
-                    'test/spec/{,**/}*.js'
+                    '<%= yeoman.app %>/styles/{,**/}*.css',
+                    '<%= yeoman.app %>/scripts/{,**/}*.js',
+                    '<%= yeoman.app %>/templates/{,**/}*.hbs',
+                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
                 ],
-                tasks: ['exec'],
                 options: {
                     livereload: true
                 }
@@ -91,38 +87,6 @@ module.exports = function (grunt) {
             }
         },
 
-
-        // express app
-        express: {
-            options: {
-                // Override defaults here
-                port: '9000'
-            },
-            dev: {
-                options: {
-                    script: 'server/app.js'
-                }
-            },
-            prod: {
-                options: {
-                    script: 'server/app.js'
-                }
-            },
-            test: {
-                options: {
-                    script: 'server/app.js'
-                }
-            }
-        },
-
-
-        // open app and test page
-        open: {
-            server: {
-                path: 'http://squidtree-backbone.ubervorrat.lan'
-            }
-        },
-
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
             server: '.tmp'
@@ -153,7 +117,7 @@ module.exports = function (grunt) {
             },
             dev: {
                 files: {
-                    '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+                    '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.less'
                 }
             },
             dist: {
@@ -300,7 +264,7 @@ module.exports = function (grunt) {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
-    // starts express server with live testing via testserver
+    // starts with live testing via testserver
     grunt.registerTask('default', function (target) {
 
         // what is this??
@@ -314,7 +278,6 @@ module.exports = function (grunt) {
             'clean:server',
             'less:dev',
             'connect:testserver',
-            'express:dev',
             'exec',
             'open',
             'watch'
