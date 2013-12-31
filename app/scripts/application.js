@@ -4,10 +4,8 @@ define([
     'hbs!tmpl/welcome'
 ],
 
-function( Backbone, Communicator, Welcome_tmpl ) {
+function( Backbone, Communicator, welcomeTmpl ) {
     'use strict';
-
-    var welcomeTmpl = Welcome_tmpl;
 
     var App = new Backbone.Marionette.Application();
 
@@ -16,8 +14,8 @@ function( Backbone, Communicator, Welcome_tmpl ) {
 
     /* Add initializers here */
     App.addInitializer( function () {
-        document.body.innerHTML = welcomeTmpl({ success: "CONGRATS!" });
-        Communicator.mediator.trigger("APP:START");
+        document.body.innerHTML = welcomeTmpl({ success: 'CONGRATS!' });
+        Communicator.mediator.trigger('APP:START');
     });
 
     return App;

@@ -21,7 +21,6 @@ app.configure(function(){
 
 // set logging
 app.use(function(req, res, next){
-  console.log('%s %s', req.method, req.url);
   next();
 });
 

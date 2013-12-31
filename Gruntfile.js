@@ -49,7 +49,21 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true
                 }
+            },
+
+            jshint: {
+                files: [
+                    'Gruntfile.js',
+                    '<%= yeoman.app %>/scripts/{,*/}*.js',
+                    '!<%= yeoman.app %>/scripts/vendor/*',
+                    'test/spec/{,*/}*.js'
+                ],
+                tasks: ['exec', 'jshint:all'],
+                options: {
+                    livereload: true
+                }
             }
+
             /* not used at the moment
             handlebars: {
                 files: [
