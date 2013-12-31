@@ -4,7 +4,7 @@
     var root = this;
 
     root.define([
-            'collections/ContactCollection'
+            'collections/contact-collection'
         ],
         function( Contactcollection ) {
 
