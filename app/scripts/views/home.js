@@ -6,7 +6,7 @@ function(Backbone){
 
     return Backbone.View.extend({
         initialize: function() {
-            console.log("initialize a Home View");
+            console.log('initialize a Home View');
         }
     });
 });

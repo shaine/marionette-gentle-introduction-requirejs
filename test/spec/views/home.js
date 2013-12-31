@@ -4,7 +4,7 @@
     var root = this;
 
     root.define([
-        'views/home'
+            'views/home'
         ],
         function( Home ) {
 
@@ -12,11 +12,7 @@
 
                 it('should be an instance of Home View', function () {
                     var home = new Home();
-                    expect( home ).to.be.an.instanceof( Home );
-                });
-
-                it('should have more test written', function(){
-                    expect( false ).to.be.ok;
+                    expect( home ).to.be.an.instanceOf( Home );
                 });
             });
 
