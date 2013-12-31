@@ -79,6 +79,13 @@ module.exports = function (grunt) {
             }
         },
 
+        // open app and test page
+        open: {
+            server: {
+                path: 'http://squidtree-backbone.ubervorrat.lan'
+            }
+        },
+
         // mocha command
         exec: {
             mocha: {
@@ -106,7 +113,6 @@ module.exports = function (grunt) {
             ]
         },
 
-
         // less
         less: {
             options: {
@@ -129,7 +135,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
 
         // require
         requirejs: {
