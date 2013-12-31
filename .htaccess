@@ -1,0 +1,41 @@
+##
+# STANDARD DIGITAL TRIKE
+# HTACCESS SETTINGS
+# (Add any client-specific settings
+# at the end of this file)
+##
+Header set X-UA-Compatible "IE=edge"
+AddType text/x-component htc
+
+Options +FollowSymLinks
+DirectoryIndex app/index.php app/index.html
+RewriteEngine On
+RewriteBase /
+
+# Forbid access to directories
+RewriteRule "\.(git|svn|sass-cache)/?" / [F,L]
+
+# Forbid access to files
+<FilesMatch "((^(\.|~)(svn|ht.*|git|[Dd][Ss]|_|rvmrc))|\.(log|md|markdown)$|README|~$)">
+    Order deny,allow
+    deny from all
+</FilesMatch>
+
+# Force as attachments
+<FilesMatch "\.(pdf|docx?|csv|xlsx?)$">
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+</FilesMatch>
+
+# force final slash
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} /+[^\.]+$
+    RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
+</IfModule>
+
+# If a directory or file exists, use it directly
+RewriteRule . app/%{REQUEST_URI}
+
+##
+# CLIENT-SPECIFIC HTACCCESS SETTINGS
+##
