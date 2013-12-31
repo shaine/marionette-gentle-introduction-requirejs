@@ -1,9 +1,6 @@
-##
-# STANDARD DIGITAL TRIKE
-# HTACCESS SETTINGS
-# (Add any client-specific settings
-# at the end of this file)
-##
+#########
+# Dev env htaccess
+#########
 Header set X-UA-Compatible "IE=edge"
 AddType text/x-component htc
 
@@ -35,7 +32,3 @@ RewriteRule "\.(git|svn|sass-cache)/?" / [F,L]
 
 # If a directory or file exists, use it directly
 RewriteRule . app/%{REQUEST_URI}
-
-##
-# CLIENT-SPECIFIC HTACCCESS SETTINGS
-##
