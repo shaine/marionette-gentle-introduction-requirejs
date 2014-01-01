@@ -45,7 +45,7 @@ require.config({
 /* require test suite */
 require([
     'jquery',
-    'spec/testSuite'
+    'spec/test-suite'
 ],
 function( $, testSuite ) {
 

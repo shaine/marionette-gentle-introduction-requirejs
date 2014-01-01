@@ -1,7 +1,7 @@
 require([
     'backbone',
     'application',
-    'regionManager'
+    'region-manager'
 ],
 function ( Backbone, App ) {
     'use strict';

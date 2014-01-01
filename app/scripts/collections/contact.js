@@ -8,7 +8,7 @@ function( Backbone, Contact ) {
     /* Return a collection class definition */
     return Backbone.Collection.extend({
         initialize: function() {
-            console.log('initialize a Contactcollection collection');
+            console.log('initialize a Contact collection');
         },
 
         model: Contact
