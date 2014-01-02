@@ -12,6 +12,7 @@ function( Backbone, ContactItemView  ) {
             console.log('initialize a Contact CollectionView');
         },
 
+        tagName: 'ul',
         itemView: ContactItemView,
 
 

@@ -12,6 +12,7 @@ function( Backbone, ContactItemViewTmpl  ) {
             console.log('initialize a ContactItemView ItemView');
         },
 
+        tagName: 'li',
         template: ContactItemViewTmpl,
 
 

@@ -11,7 +11,8 @@ function( Backbone, Contact ) {
             console.log('initialize a Contact collection');
         },
 
-        model: Contact
+        model: Contact,
+        comparator: 'firstName'
 
     });
 });
