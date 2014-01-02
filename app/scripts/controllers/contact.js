@@ -1,8 +1,9 @@
 define([
     'backbone',
-    'views/collection/contact'
+    'views/collection/contact',
+    'controllers/show/contact'
 ],
-function( Backbone, ContactCollectionView ) {
+function( Backbone, ContactCollectionView, ContactShowController ) {
     'use strict';
 
     return Backbone.Marionette.Controller.extend({
@@ -16,6 +17,15 @@ function( Backbone, ContactCollectionView ) {
 
             var contactCollectionView = new ContactCollectionView({
                 collection: contacts
+            });
+
+            contactCollectionView.on('itemview:contact:delete', function(childView, model){
+                contacts.remove(model);
+            });
+
+            contactCollectionView.on('itemview:contact:show', function(childView, model){
+                var contactShowController = new ContactShowController();
+                contactShowController.showContact(model);
             });
 
             window.App.mainRegion.show(contactCollectionView);
