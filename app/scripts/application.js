@@ -21,19 +21,19 @@ function( Backbone, Communicator, welcomeTmpl, ContactCollection, ContactCollect
     App.on('initialize:after', function() {
         var contacts = new ContactCollection([
             {
-                firstName: "Bob",
-                lastName: "Brigham",
-                phoneNumber: "555-0163"
+                firstName: 'Bob',
+                lastName: 'Brigham',
+                phoneNumber: '555-0163'
             },
             {
-                firstName: "Alice",
-                lastName: "Arten",
-                phoneNumber: "555-0184"
+                firstName: 'Alice',
+                lastName: 'Arten',
+                phoneNumber: '555-0184'
             },
             {
-                firstName: "Charlie",
-                lastName: "Campbell",
-                phoneNumber: "555-0129"
+                firstName: 'Charlie',
+                lastName: 'Campbell',
+                phoneNumber: '555-0129'
             }
         ]);
 
@@ -41,7 +41,7 @@ function( Backbone, Communicator, welcomeTmpl, ContactCollection, ContactCollect
             collection: contacts
         });
 
-        App.mainRegion.show(contactsView)
+        App.mainRegion.show(contactsView);
 
         Communicator.mediator.trigger('APP:START');
     });
