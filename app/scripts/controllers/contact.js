@@ -1,13 +1,24 @@
 define([
-    'backbone'
+    'backbone',
+    'views/collection/contact'
 ],
-function( Backbone ) {
+function( Backbone, ContactCollectionView ) {
     'use strict';
 
     return Backbone.Marionette.Controller.extend({
 
         initialize: function( options ) {
             console.log('initialize a Contact Controller');
+        },
+
+        listContacts: function() {
+            var contacts = App.request('contact:entities');
+
+            var contactCollectionView = new ContactCollectionView({
+                collection: contacts
+            });
+
+            App.mainRegion.show(contactCollectionView);
         }
     });
 
