@@ -1,12 +1,11 @@
 define([
     'backbone',
     'communicator',
-    'hbs!tmpl/welcome',
     'collections/contact',
     'views/collection/contact'
 ],
 
-function( Backbone, Communicator, welcomeTmpl, ContactCollection, ContactCollectionView ) {
+function( Backbone, Communicator, ContactCollection, ContactCollectionView ) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();
