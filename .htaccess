@@ -24,7 +24,7 @@ RewriteRule "\.(git|svn|sass-cache)/?" / [F,L]
     Header set Content-Disposition attachment
 </FilesMatch>
 
-<FilesMatch "\.(html|htm|js|css)$">
+<FilesMatch "\.(html|htm|js|css|hbs)$">
     FileETag None
     <ifModule mod_headers.c>
         Header unset ETag

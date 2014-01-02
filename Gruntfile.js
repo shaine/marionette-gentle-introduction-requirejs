@@ -50,7 +50,7 @@ module.exports = function (grunt) {
             jshint: {
                 files: [
                     'Gruntfile.js',
-                    '<%= yeoman.app %>/scripts/{,*/}*.js',
+                    '<%= yeoman.app %>/scripts/{,**/}*.js',
                     '!<%= yeoman.app %>/scripts/vendor/*',
                     'test/spec/{,*/}*.js'
                 ],

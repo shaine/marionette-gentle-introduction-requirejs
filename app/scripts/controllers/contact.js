@@ -12,13 +12,13 @@ function( Backbone, ContactCollectionView ) {
         },
 
         listContacts: function() {
-            var contacts = App.request('contact:entities');
+            var contacts = window.App.request('contact:entities');
 
             var contactCollectionView = new ContactCollectionView({
                 collection: contacts
             });
 
-            App.mainRegion.show(contactCollectionView);
+            window.App.mainRegion.show(contactCollectionView);
         }
     });
 

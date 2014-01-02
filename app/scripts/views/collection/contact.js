@@ -1,8 +1,9 @@
 define([
     'backbone',
-    'views/item/contact'
+    'views/item/contact',
+    'views/collection/contact'
 ],
-function( Backbone, ContactItemView  ) {
+function( Backbone, ContactItemView, ContactCollectionViewTmpl ) {
     'use strict';
 
     /* Return a ItemView class definition */
@@ -12,9 +13,11 @@ function( Backbone, ContactItemView  ) {
             console.log('initialize a Contact CollectionView');
         },
 
-        tagName: 'ul',
+        tagName: 'table',
+        className: 'table table-hover',
         itemView: ContactItemView,
-
+        itemViewContainer: 'tbody',
+        template: ContactCollectionViewTmpl,
 
         /* ui selector cache */
         ui: {},
