@@ -56,7 +56,9 @@ function( Backbone, Communicator, ContactCollection, router ) {
 
     App.on('initialize:after', function() {
         if (Backbone.history) {
-            Backbone.history.start();
+            Backbone.history.start({
+                pushState: true
+            });
 
             if (this.getCurrentRoute() === '') {
                 Communicator.mediator.trigger('contacts:list');

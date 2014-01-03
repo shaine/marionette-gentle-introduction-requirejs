@@ -34,11 +34,11 @@ RewriteRule "\.(git|svn|sass-cache)/?" / [F,L]
     </ifModule>
 </FilesMatch>
 
-# force final slash
-<IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_URI} /+[^\.]+$
-    RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
-</IfModule>
+# Force everything into app/
+RewriteRule (.*) app%{REQUEST_URI}
 
-# If a directory or file exists, use it directly
-RewriteRule . app/%{REQUEST_URI}
+# If the path doesn't exist, assume it's a
+# JS app path and run it through the index
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*) app/index.html [L]
+
