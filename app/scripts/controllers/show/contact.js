@@ -16,6 +16,6 @@ function( Backbone, Communicator, ContactShowView ) {
 
             Communicator.mediator.trigger('app:show', contactShowView);
         }
-    }));
+    }))();
 
 });
