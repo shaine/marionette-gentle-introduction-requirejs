@@ -1,19 +1,21 @@
 define([
     'backbone',
-    'views/show/contact',
-    'application'
+    'communicator',
+    'views/show/contact'
 ],
-function( Backbone, ContactShowView, App ) {
+function( Backbone, Communicator, ContactShowView ) {
     'use strict';
 
-    return Backbone.Marionette.Controller.extend({
-        showContact: function(model) {
+    return new (Backbone.Marionette.Controller.extend({
+        showContact: function(id) {
+            var contacts = Communicator.reqres.request('contact:entities');
+            var model = contacts.get(id);
             var contactShowView = new ContactShowView({
                 model: model
             });
 
-            App.mainRegion.show(contactShowView);
+            Communicator.mediator.trigger('app:show', contactShowView);
         }
-    });
+    }));
 
 });

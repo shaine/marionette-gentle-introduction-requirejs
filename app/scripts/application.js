@@ -1,10 +1,11 @@
 define([
     'backbone',
     'communicator',
-    'collections/contact'
+    'collections/contact',
+    'routers/router'
 ],
 
-function( Backbone, Communicator, ContactCollection ) {
+function( Backbone, Communicator, ContactCollection, router ) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();
@@ -12,13 +13,19 @@ function( Backbone, Communicator, ContactCollection ) {
     /* Add application regions here */
     App.addRegions({mainRegion: '#mainRegion'});
 
+    App.navigate = function(route, options){
+        if (!options) {
+            options = {};
+        }
+        Backbone.history.navigate(route, options);
+    };
+
+    App.getCurrentRoute = function() {
+        return Backbone.history.fragment;
+    };
+
     /* Add initializers here */
     App.addInitializer( function () {
-    });
-
-    App.on('initialize:after', function() {
-        Communicator.mediator.trigger('APP:START');
-
         var contacts;
 
         var initializeContacts = function(){
@@ -38,9 +45,25 @@ function( Backbone, Communicator, ContactCollection ) {
             }
         };
 
-        App.reqres.setHandler('contact:entities', function(){
+        Communicator.reqres.setHandler('contact:entities', function(){
             return API.getContactEntities();
         });
+
+        Communicator.mediator.on('app:show', function(view) {
+            App.mainRegion.show(view);
+        });
+    });
+
+    App.on('initialize:after', function() {
+        if (Backbone.history) {
+            Backbone.history.start();
+
+            if (this.getCurrentRoute() === '') {
+                Communicator.mediator.trigger('contacts:list');
+            }
+        }
+
+        Communicator.mediator.trigger('app:start');
     });
 
     return App;

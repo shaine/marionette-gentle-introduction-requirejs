@@ -9,7 +9,4 @@ function ( Backbone, App, RegionManager, ContactController ) {
 
     App.start();
     window.App = App;
-
-    var contactController = new ContactController();
-    contactController.listContacts();
 });

@@ -1,19 +1,20 @@
 define([
     'backbone',
     'views/collection/contact',
-    'controllers/show/contact'
+    'controllers/show/contact',
+    'communicator'
 ],
-function( Backbone, ContactCollectionView, ContactShowController ) {
+function( Backbone, ContactCollectionView, contactShowController, Communicator ) {
     'use strict';
 
-    return Backbone.Marionette.Controller.extend({
+    return new (Backbone.Marionette.Controller.extend({
 
         initialize: function( options ) {
             console.log('initialize a Contact Controller');
         },
 
         listContacts: function() {
-            var contacts = window.App.request('contact:entities');
+            var contacts = Communicator.reqres.request('contact:entities');
 
             var contactCollectionView = new ContactCollectionView({
                 collection: contacts
@@ -24,12 +25,13 @@ function( Backbone, ContactCollectionView, ContactShowController ) {
             });
 
             contactCollectionView.on('itemview:contact:show', function(childView, model){
-                var contactShowController = new ContactShowController();
-                contactShowController.showContact(model);
+                contactShowController.showContact(model.get('id'));
+
+                Communicator.mediator.trigger('contact:show', model.get('id'));
             });
 
-            window.App.mainRegion.show(contactCollectionView);
+            Communicator.mediator.trigger('app:show', contactCollectionView);
         }
-    });
+    }))();
 
 });
