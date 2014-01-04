@@ -1,28 +1,18 @@
 define([
     'backbone',
-    'hbs!tmpl/item/contact-missing_tmpl'
+    'hbs!tmpl/show/contact-missing'
 ],
-function( Backbone, ContactMissingTmpl  ) {
+function( Backbone, ContactMissingShowViewTmpl  ) {
     'use strict';
 
     /* Return a ItemView class definition */
     return Backbone.Marionette.ItemView.extend({
 
         initialize: function() {
-            console.log('initialize a ContactMissing ItemView');
+            console.log('initialize a ContactShowMissing ItemView');
         },
 
-        template: ContactMissingTmpl,
-
-
-        /* ui selector cache */
-        ui: {},
-
-        /* Ui events hash */
-        events: {},
-
-        /* on render callback */
-        onRender: function() {}
+        template: ContactMissingShowViewTmpl
     });
 
 });
