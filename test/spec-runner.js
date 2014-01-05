@@ -2,7 +2,7 @@ require.config({
     baseUrl: '../app/scripts',
     urlArgs: 'cb=' + Math.random(),
 
-    deps: ['backbone.marionette'],
+    deps: ['backbone.marionette', 'backbone.localstorage'],
 
     paths: {
         spec: '../../test/spec', // lives in the test directory
@@ -19,6 +19,8 @@ require.config({
         'backbone.marionette': '../bower_components/backbone.marionette/lib/core/amd/backbone.marionette',
         'backbone.wreqr': '../bower_components/backbone.wreqr/lib/amd/backbone.wreqr',
         'backbone.babysitter': '../bower_components/backbone.babysitter/lib/amd/backbone.babysitter',
+
+        'backbone.localstorage': 'vendor/backbone.localstorage',
 
         /* alias the bootstrap js lib */
         bootstrap: 'vendor/bootstrap',

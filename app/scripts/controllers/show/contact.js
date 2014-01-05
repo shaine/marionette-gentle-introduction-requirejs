@@ -9,19 +9,20 @@ function( Backbone, Communicator, ContactShowView, ContactMissingShowView ) {
 
     return new (Backbone.Marionette.Controller.extend({
         showContact: function(id) {
-            var contacts = Communicator.reqres.request('contact:entities');
-            var model = contacts.get(id);
-            var contactShowView;
+            var fetchingContact = Communicator.reqres.request('contact:entity', id);
+            $.when(fetchingContact).done(function(contact) {
+                var contactShowView;
 
-            if (typeof model !== 'undefined') {
-                contactShowView = new ContactShowView({
-                    model: model
-                });
-            } else {
-                contactShowView = new ContactMissingShowView();
-            }
+                if (typeof contact !== 'undefined') {
+                    contactShowView = new ContactShowView({
+                        model: contact
+                    });
+                } else {
+                    contactShowView = new ContactMissingShowView();
+                }
 
-            Communicator.mediator.trigger('app:show', contactShowView);
+                Communicator.mediator.trigger('app:show', contactShowView);
+            });
         }
     }))();
 

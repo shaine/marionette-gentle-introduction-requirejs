@@ -1,16 +1,23 @@
 define([
-    'backbone'
+    'backbone',
+    'entities/local-storage'
 ],
-function( Backbone ) {
+function( Backbone, LocalStorage ) {
     'use strict';
 
     /* Return a model class definition */
-    return Backbone.Model.extend({
+    var Contact = Backbone.Model.extend({
         initialize: function() {
             console.log('initialize a Contact model');
         },
 
-        defaults: {}
+        defaults: {},
+
+        urlRoot: 'contacts'
 
     });
+
+    LocalStorage.configureStorage(Contact);
+
+    return Contact;
 });

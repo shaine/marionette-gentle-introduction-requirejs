@@ -1,18 +1,24 @@
 define([
     'backbone',
-    'models/contact'
+    'models/contact',
+    'entities/local-storage'
 ],
-function( Backbone, Contact ) {
+function( Backbone, Contact, LocalStorage ) {
     'use strict';
 
     /* Return a collection class definition */
-    return Backbone.Collection.extend({
+    var ContactCollection = Backbone.Collection.extend({
         initialize: function() {
             console.log('initialize a Contact collection');
         },
 
+        url: 'contacts',
         model: Contact,
         comparator: 'firstName'
 
     });
+
+    LocalStorage.configureStorage(ContactCollection);
+
+    return ContactCollection;
 });

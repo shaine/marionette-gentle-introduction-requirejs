@@ -1,10 +1,9 @@
 require([
     'backbone',
     'application',
-    'region-manager',
-    'controllers/contact'
+    'region-manager'
 ],
-function ( Backbone, App, RegionManager, ContactController ) {
+function ( Backbone, App, RegionManager ) {
     'use strict';
 
     App.start();
