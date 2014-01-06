@@ -3,7 +3,7 @@ require.config({
     baseUrl: '/scripts',
 
     /* starting point for application */
-    deps: ['backbone.marionette',  'backbone.localstorage', 'bootstrap', 'main'],
+    deps: ['backbone.marionette',  'backbone.localstorage', 'spin', 'jquery.spin', 'bootstrap', 'main'],
 
 
     shim: {
@@ -31,6 +31,8 @@ require.config({
         'backbone.babysitter': '../bower_components/backbone.babysitter/lib/amd/backbone.babysitter',
 
         'backbone.localstorage': 'vendor/backbone.localstorage',
+        'spin': 'vendor/spin',
+        'jquery.spin': 'vendor/spin.jquery',
 
         /* alias the bootstrap js lib */
         bootstrap: 'vendor/bootstrap',
