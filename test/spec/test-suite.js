@@ -6,7 +6,7 @@ define(function() {
         specs: [
             'spec/collections/contact.js',
             'spec/models/contact.js',
-            'spec/views/collection/contact.js',
+            'spec/views/composite/contact.js',
             'spec/views/home.js',
             'spec/views/item/contact.js'
         ]

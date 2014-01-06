@@ -4,7 +4,7 @@
     var root = this;
 
     root.define([
-            'views/collection/contact'
+            'views/composite/contact'
         ],
         function( ContactCollectionView ) {
 

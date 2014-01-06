@@ -9,7 +9,7 @@ define(function() {
             'spec/models/contact.js',
             'spec/routers/router.js',
             'spec/test-suite.js',
-            'spec/views/collection/contact.js',
+            'spec/views/composite/contact.js',
             'spec/views/home.js',
             'spec/views/item/contact-missing.js',
             'spec/views/item/contact.js',

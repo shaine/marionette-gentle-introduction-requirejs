@@ -1,7 +1,7 @@
 define([
     'backbone',
     'jquery',
-    'views/collection/contact',
+    'views/composite/contact',
     'controllers/show/contact',
     'communicator'
 ],

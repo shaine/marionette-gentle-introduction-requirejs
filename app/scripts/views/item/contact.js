@@ -3,7 +3,7 @@ define([
     'backbone.marionette',
     'hbs!tmpl/item/contact'
 ],
-function( Backbone, Marionette, ContactItemViewTmpl  ) {
+function( Backbone, Marionette, ContactItemViewTmpl ) {
     'use strict';
 
     /* Return a ItemView class definition */

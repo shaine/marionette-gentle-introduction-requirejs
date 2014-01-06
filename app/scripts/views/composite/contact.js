@@ -1,13 +1,13 @@
 define([
     'backbone',
     'views/item/contact',
-    'views/collection/contact'
+    'hbs!tmpl/composite/contact'
 ],
 function( Backbone, ContactItemView, ContactCollectionViewTmpl ) {
     'use strict';
 
     /* Return a ItemView class definition */
-    return Backbone.Marionette.CollectionView.extend({
+    return Backbone.Marionette.CompositeView.extend({
 
         initialize: function() {
             console.log('initialize a Contact CollectionView');
