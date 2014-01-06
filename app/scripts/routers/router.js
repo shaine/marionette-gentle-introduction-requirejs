@@ -3,15 +3,17 @@ define([
     'backbone.marionette',
     'communicator',
     'controllers/contact',
-    'controllers/show/contact'
+    'controllers/show/contact',
+    'controllers/edit/contact'
 ],
-function(Backbone, Marionette, Communicator, contactController, contactShowController){
+function(Backbone, Marionette, Communicator, contactController, contactShowController, contactEditController) {
     'use strict';
 
     var router = new (Marionette.AppRouter.extend({
         appRoutes: {
             'contacts': 'listContacts',
-            'contacts/:id': 'showContact'
+            'contacts/:id': 'showContact',
+            'contacts/:id/edit': 'editContact'
         },
 
         controller: {
@@ -20,6 +22,9 @@ function(Backbone, Marionette, Communicator, contactController, contactShowContr
             },
             showContact: function(id) {
                 contactShowController.showContact(id);
+            },
+            editContact: function(id) {
+                contactEditController.editContact(id);
             }
         }
     }))();
@@ -32,6 +37,11 @@ function(Backbone, Marionette, Communicator, contactController, contactShowContr
     Communicator.mediator.on('contact:show', function(id) {
         Backbone.history.navigate('contacts/'+id);
         router.controller.showContact(id);
+    });
+
+    Communicator.mediator.on('contact:edit', function(id) {
+        Backbone.history.navigate('contacts/'+id/+'edit');
+        router.controller.editContact(id);
     });
 
     return router;
