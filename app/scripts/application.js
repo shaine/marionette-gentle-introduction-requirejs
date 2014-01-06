@@ -47,11 +47,13 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
             getContactEntities: function(){
                 var contacts = new ContactCollection();
                 var defer = $.Deferred();
-                contacts.fetch({
-                    success: function(data) {
-                        defer.resolve(data);
-                    }
-                });
+                setTimeout(function() {
+                    contacts.fetch({
+                        success: function(data) {
+                            defer.resolve(data);
+                        }
+                    });
+                }, 2000);
 
                 var promise = defer.promise();
                 $.when(promise).done(function(contacts) {
@@ -62,7 +64,7 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
                 });
 
 
-                return contacts;
+                return defer.promise();
             },
 
             getContactEntity: function(id) {

@@ -3,9 +3,10 @@ define([
     'jquery',
     'views/composite/contact',
     'controllers/show/contact',
-    'communicator'
+    'communicator',
+    'views/loading'
 ],
-function( Backbone, $, ContactCollectionView, contactShowController, Communicator ) {
+function( Backbone, $, ContactCollectionView, contactShowController, Communicator, LoadingView ) {
     'use strict';
 
     return new (Backbone.Marionette.Controller.extend({
@@ -15,6 +16,9 @@ function( Backbone, $, ContactCollectionView, contactShowController, Communicato
         },
 
         listContacts: function() {
+            var loadingView = new LoadingView();
+            Communicator.mediator.trigger('app:show', loadingView);
+
             var fetchingContacts = Communicator.reqres.request('contact:entities');
 
             $.when(fetchingContacts).done(function(contacts) {
