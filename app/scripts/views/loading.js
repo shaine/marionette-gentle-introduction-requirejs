@@ -6,12 +6,22 @@ function(Backbone, LoadingViewTmpl){
     'use strict';
 
     return Backbone.Marionette.ItemView.extend({
-        initialize: function() {
+        initialize: function(options) {
+            options = options || {};
+            this.title = options.title || 'Loading Data';
+            this.message = options.message || 'Please wait, data is loading.';
+
             console.log('initialize a Loading View');
         },
 
-        template: LoadingViewTmpl,
+        serializeData: function() {
+            return {
+                title: this.title,
+                message: this.message
+            };
+        },
 
+        template: LoadingViewTmpl,
 
         onShow: function(){
             var opts = {

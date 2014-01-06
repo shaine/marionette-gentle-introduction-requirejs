@@ -10,7 +10,10 @@ function( Backbone, Communicator, ContactShowView, ContactMissingShowView, Loadi
 
     return new (Backbone.Marionette.Controller.extend({
         showContact: function(id) {
-            var loadingView = new LoadingView();
+            var loadingView = new LoadingView({
+                title: 'Artificial Loading Delay',
+                message: 'Data loading is delayed to demonstrate using a loading view.'
+            });
             Communicator.mediator.trigger('app:show', loadingView);
 
             var fetchingContact = Communicator.reqres.request('contact:entity', id);
