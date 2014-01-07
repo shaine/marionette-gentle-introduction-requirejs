@@ -43,6 +43,16 @@ function( Backbone, $, ContactCollectionView, ContactEditView, contactShowContro
                         asModal: true
                     });
 
+                    view.on('form:submit', function(data) {
+                        if (model.save(data)) {
+                            childView.render();
+                            Communicator.mediator.trigger('app:dialog:close');
+                            childView.flash('success');
+                        } else {
+                            view.triggerMethod('form:data:invalid', model.validationError);
+                        }
+                    });
+
                     Communicator.mediator.trigger('app:dialog', view);
                 });
 

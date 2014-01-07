@@ -103,6 +103,10 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
         Communicator.mediator.on('app:dialog', function(view) {
             App.dialogRegion.show(view);
         });
+
+        Communicator.mediator.on('app:dialog:close', function(view) {
+            App.dialogRegion.close();
+        });
     });
 
     App.on('initialize:after', function() {
