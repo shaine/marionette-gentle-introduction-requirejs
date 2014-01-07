@@ -30,8 +30,14 @@ module.exports = function (grunt) {
         watch: {
 
             less: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
-                tasks: ['less:dev']
+                files: [
+                    '<%= yeoman.app %>/styles/{,*/}*.less',
+                    '<%= yeoman.app %>/styles/vendor{,*/}*.css'
+                ],
+                tasks: [
+                    'less:dev',
+                    'concat:dev'
+                ]
             },
 
             livereload: {
@@ -133,6 +139,23 @@ module.exports = function (grunt) {
                 files: {
                     '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.less'
                 }
+            }
+        },
+
+        concat: {
+            dev: {
+                src: [
+                    '<%= yeoman.app %>/styles/main.css',
+                    '<%= yeoman.app %>/styles/vendor/*.css'
+                ],
+                dest: '<%= yeoman.app %>/styles/main.css'
+            },
+            dist: {
+                src: [
+                    '.tmp/styles/main.css',
+                    '<%= yeoman.app %>/styles/vendor/*.css'
+                ],
+                dest: '.tmp/styles/main.css'
             }
         },
 
@@ -282,6 +305,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'less:dev',
+            'concat:dev',
             'connect:testserver',
             'exec',
             'open',
@@ -303,11 +327,11 @@ module.exports = function (grunt) {
         'createDefaultTemplate',
         'handlebars',
         'less:dist',
+        'concat:dist',
         'useminPrepare',
         'requirejs',
         'imagemin',
         'htmlmin',
-        'concat',
         'cssmin',
         'uglify',
         'copy',
