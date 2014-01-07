@@ -24,14 +24,15 @@ function( Backbone, Marionette, ContactItemViewTmpl ) {
         events: {
             'click': 'highlightName',
             'click button.js-delete': 'deleteClicked',
-            'click td a.js-show': 'showClicked'
+            'click td a.js-show': 'showClicked',
+            'click td a.js-edit': 'editClicked'
         },
 
-        highlightName: function(e){
+        highlightName: function(e) {
             this.$el.toggleClass('warning');
         },
 
-        deleteClicked: function(e){
+        deleteClicked: function(e) {
             e.stopPropagation();
             this.trigger('contact:delete', this.model);
         },
@@ -42,7 +43,13 @@ function( Backbone, Marionette, ContactItemViewTmpl ) {
             this.trigger('contact:show', this.model);
         },
 
-        remove: function(){
+        editClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger('contact:edit', this.model);
+        },
+
+        remove: function() {
             var self = this;
             this.$el.fadeOut(function(){
                 Marionette.ItemView.prototype.remove.call(self);
