@@ -15,6 +15,8 @@ define(function() {
             'spec/views/item/contact-missing.js',
             'spec/views/item/contact.js',
             'spec/views/item/edit/contact.js',
+            'spec/views/item/panel.js',
+            'spec/views/layout/contact-list.js',
             'spec/views/loading.js'
         ]
     };

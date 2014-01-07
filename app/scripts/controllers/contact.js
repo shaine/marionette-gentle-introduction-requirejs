@@ -3,11 +3,13 @@ define([
     'jquery',
     'views/composite/contact',
     'views/edit/contact',
+    'views/loading',
+    'views/layout/contact-list',
+    'views/item/panel',
     'controllers/show/contact',
-    'communicator',
-    'views/loading'
+    'communicator'
 ],
-function( Backbone, $, ContactCollectionView, ContactEditView, contactShowController, Communicator, LoadingView ) {
+function( Backbone, $, ContactCollectionView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, contactShowController, Communicator ) {
     'use strict';
 
     return new (Backbone.Marionette.Controller.extend({
@@ -22,9 +24,17 @@ function( Backbone, $, ContactCollectionView, ContactEditView, contactShowContro
 
             var fetchingContacts = Communicator.reqres.request('contact:entities');
 
+            var contactListLayoutView = new ContactListLayoutView();
+            var panelView = new PanelView();
+
             $.when(fetchingContacts).done(function(contacts) {
                 var contactCollectionView = new ContactCollectionView({
                     collection: contacts
+                });
+
+                contactListLayoutView.on('show', function() {
+                    contactListLayoutView.panelRegion.show(panelView);
+                    contactListLayoutView.contactsRegion.show(contactCollectionView);
                 });
 
                 contactCollectionView.on('itemview:contact:delete', function(childView, model){
@@ -56,7 +66,7 @@ function( Backbone, $, ContactCollectionView, ContactEditView, contactShowContro
                     Communicator.mediator.trigger('app:dialog', view);
                 });
 
-                Communicator.mediator.trigger('app:show', contactCollectionView);
+                Communicator.mediator.trigger('app:show', contactListLayoutView);
             });
         }
     }))();
