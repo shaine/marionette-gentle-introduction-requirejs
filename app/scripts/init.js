@@ -3,7 +3,7 @@ require.config({
     baseUrl: '/scripts',
 
     /* starting point for application */
-    deps: ['backbone.marionette', 'backbone.localstorage', 'backbone.syphon', 'spin', 'jquery.spin', 'bootstrap', 'main'],
+    deps: ['backbone.marionette', 'backbone.localstorage', 'backbone.syphon', 'spin', 'jquery.spin', 'jquery.ui', 'bootstrap', 'main'],
 
 
     shim: {
@@ -21,6 +21,9 @@ require.config({
         'backbone.syphon': {
             deps: ['backbone'],
             exports: 'Backbone.Syphon'
+        },
+        'jquery.ui': {
+            deps: ['jquery']
         }
     },
 
@@ -38,6 +41,7 @@ require.config({
         'backbone.syphon': 'vendor/backbone.syphon',
         'spin': 'vendor/spin',
         'jquery.spin': 'vendor/spin.jquery',
+        'jquery.ui': 'vendor/jquery-ui-1.10.3',
 
         /* alias the bootstrap js lib */
         bootstrap: 'vendor/bootstrap',
