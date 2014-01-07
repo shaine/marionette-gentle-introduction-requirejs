@@ -1,8 +1,9 @@
 define([
     'backbone',
-    'entities/local-storage'
+    'entities/local-storage',
+    'underscore'
 ],
-function( Backbone, LocalStorage ) {
+function( Backbone, LocalStorage, _ ) {
     'use strict';
 
     /* Return a model class definition */
@@ -13,8 +14,25 @@ function( Backbone, LocalStorage ) {
 
         defaults: {},
 
-        urlRoot: 'contacts'
+        urlRoot: 'contacts',
 
+        validate: function(attrs, options) {
+            var errors = {};
+            if (!attrs.firstName) {
+                errors.firstName = 'can\'t be blank';
+            }
+            if (!attrs.lastName) {
+                errors.lastName = 'can\'t be blank';
+            }
+            else{
+                if (attrs.lastName.length < 2) {
+                    errors.lastName = 'is too short';
+                }
+            }
+            if(!_.isEmpty(errors)){
+                return errors;
+            }
+        }
     });
 
     LocalStorage.configureStorage(Contact);

@@ -1,9 +1,10 @@
 define([
     'backbone',
     'backbone.marionette',
+    'communicator',
     'hbs!tmpl/show/contact'
 ],
-function( Backbone, Marionette, ContactShowViewTmpl ) {
+function( Backbone, Marionette, Communicator, ContactShowViewTmpl ) {
     'use strict';
 
     /* Return a ItemView class definition */
@@ -13,6 +14,16 @@ function( Backbone, Marionette, ContactShowViewTmpl ) {
             console.log('initialize a ContactShow ItemView');
         },
 
-        template: ContactShowViewTmpl
+        template: ContactShowViewTmpl,
+
+        /* Ui events hash */
+        events: {
+            'click a.js-edit': 'editClicked'
+        },
+
+        editClicked: function(e) {
+            e.preventDefault();
+            this.trigger('contact:edit', this.model);
+        }
     });
 });

@@ -24,6 +24,10 @@ function( Backbone, Communicator, ContactShowView, ContactMissingShowView, Loadi
                     contactShowView = new ContactShowView({
                         model: contact
                     });
+
+                    contactShowView.on('contact:edit', function(model) {
+                        Communicator.mediator.trigger('contact:edit', model.get('id'));
+                    });
                 } else {
                     contactShowView = new ContactMissingShowView();
                 }

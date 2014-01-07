@@ -40,7 +40,7 @@ function(Backbone, Marionette, Communicator, contactController, contactShowContr
     });
 
     Communicator.mediator.on('contact:edit', function(id) {
-        Backbone.history.navigate('contacts/'+id/+'edit');
+        Backbone.history.navigate('contacts/'+id+'/edit');
         router.controller.editContact(id);
     });
 
