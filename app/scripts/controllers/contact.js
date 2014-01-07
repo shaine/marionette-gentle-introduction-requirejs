@@ -2,11 +2,12 @@ define([
     'backbone',
     'jquery',
     'views/composite/contact',
+    'views/edit/contact',
     'controllers/show/contact',
     'communicator',
     'views/loading'
 ],
-function( Backbone, $, ContactCollectionView, contactShowController, Communicator, LoadingView ) {
+function( Backbone, $, ContactCollectionView, ContactEditView, contactShowController, Communicator, LoadingView ) {
     'use strict';
 
     return new (Backbone.Marionette.Controller.extend({
@@ -34,6 +35,15 @@ function( Backbone, $, ContactCollectionView, contactShowController, Communicato
                     contactShowController.showContact(model.get('id'));
 
                     Communicator.mediator.trigger('contact:show', model.get('id'));
+                });
+
+                contactCollectionView.on('itemview:contact:edit', function(childView, model) {
+                    var view = new ContactEditView({
+                        model: model,
+                        asModal: true
+                    });
+
+                    Communicator.mediator.trigger('app:dialog', view);
                 });
 
                 Communicator.mediator.trigger('app:show', contactCollectionView);

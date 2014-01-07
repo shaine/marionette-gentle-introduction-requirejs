@@ -34,6 +34,16 @@ function( Backbone, Syphon, _, EditContactTmpl ) {
             }
         },
 
+        onShow: function() {
+            if (this.options.asModal) {
+                this.$el.dialog({
+                    modal: true,
+                    title: this.title,
+                    width: 'auto'
+                });
+            }
+        },
+
         submitClicked: function(e) {
             e.preventDefault();
             var data = Syphon.serialize(this);
