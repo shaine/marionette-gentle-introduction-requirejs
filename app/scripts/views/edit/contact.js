@@ -12,6 +12,7 @@ function( Backbone, Syphon, _, EditContactTmpl ) {
 
         initialize: function() {
             console.log('initialize a EditContact ItemView');
+            this.title = 'Edit ' + this.model.get('firstName') + ' ' + this.model.get('lastName');
         },
 
         template: EditContactTmpl,
@@ -26,7 +27,12 @@ function( Backbone, Syphon, _, EditContactTmpl ) {
         },
 
         /* on render callback */
-        onRender: function() {},
+        onRender: function() {
+            if (!this.options.asModal) {
+                this.$h1 = $('<h1>', {text: this.title});
+                this.$el.prepend(this.$h1);
+            }
+        },
 
         submitClicked: function(e) {
             e.preventDefault();
