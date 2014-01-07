@@ -12,7 +12,10 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
     var App = new Backbone.Marionette.Application();
 
     /* Add application regions here */
-    App.addRegions({mainRegion: '#mainRegion'});
+    App.addRegions({
+        mainRegion: '#main-region',
+        dialogRegion: '#dialog-region'
+    });
 
     App.navigate = function(route, options){
         if (!options) {
@@ -95,6 +98,10 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
 
         Communicator.mediator.on('app:show', function(view) {
             App.mainRegion.show(view);
+        });
+
+        Communicator.mediator.on('app:dialog', function(view) {
+            App.dialogRegion.show(view);
         });
     });
 
