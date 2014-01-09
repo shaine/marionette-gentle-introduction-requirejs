@@ -1,4 +1,4 @@
-squidtree-backbone
+marionette-gentle-introduction-requirejs
 ==================
 
-Squidtree's Backbone-Marionette iteration.
+RequireJS implementation of the davidsulc/marionette-gentle-introduction tutorial, based on boilerplate code from the mrichard/generator-marionette Yeoman generator.
