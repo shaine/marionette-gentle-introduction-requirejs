@@ -1,5 +1,5 @@
 {
-  "name": "squidtree-backbone",
+  "name": "marionette-gentle-introduction-requirejs",
   "version": "0.0.1",
   "dependencies": {
     "request": "~2.21.0",

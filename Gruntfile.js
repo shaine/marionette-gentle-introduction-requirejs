@@ -88,7 +88,7 @@ module.exports = function (grunt) {
         // open app and test page
         open: {
             server: {
-                path: 'http://squidtree-backbone.ubervorrat.lan'
+                path: 'http://marionette-gentle-introduction-requirejs.ubervorrat.lan'
             }
         },
 
