@@ -10,8 +10,8 @@
             describe('ContactList Layout', function () {
 
                 it('should be an instance of ContactList Layout', function () {
-                    var contact-list = new ContactList();
-                    expect( contact-list ).to.be.an.instanceOf( ContactList );
+                    var contactList = new ContactList();
+                    expect( contactList ).to.be.an.instanceOf( ContactList );
                 });
             });
         });

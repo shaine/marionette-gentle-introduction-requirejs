@@ -4,7 +4,7 @@
     var root = this;
 
     root.define([
-            'views/item/contact'
+            'views/show/contact'
         ],
         function( ContactItemView ) {
 
@@ -12,7 +12,7 @@
 
                 it('should be an instance of ContactItemView Itemview', function () {
                     var contactItemView = new ContactItemView();
-                    expect( contactItemView ).to.be.an.instanceof( ContactItemView );
+                    expect( contactItemView ).to.be.an.instanceOf( ContactItemView );
                 });
             });
 

@@ -6,14 +6,9 @@
     root.define([
             'controllers/contact'
         ],
-        function( ContactController ) {
+        function( contactController ) {
 
             describe('ContactController Controller', function () {
-
-                it('should be an instance of ContactController Controller', function () {
-                    var contactController = new ContactController();
-                    expect( contactController ).to.be.an.instanceOf( ContactController );
-                });
             });
 
         });

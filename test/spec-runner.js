@@ -12,7 +12,7 @@ require.config({
         underscore: '../bower_components/underscore-amd/underscore',
 
         /* backbone plugins */
-        'backbone.syphon': '../bower_components/backbone.syphon/lib/amd/backbone.syphon',
+        'backbone.syphon': 'vendor/backbone.syphon',
         'backbone.iobind': '../bower_components/backbone.iobind/dist/backbone.iobind',
 
         /* alias all marionette libs */

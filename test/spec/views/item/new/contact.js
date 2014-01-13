@@ -10,8 +10,8 @@
             describe('NewContact Itemview', function () {
 
                 it('should be an instance of NewContact Itemview', function () {
-                    var new/contact = new NewContact();
-                    expect( new/contact ).to.be.an.instanceOf( NewContact );
+                    var newContact = new NewContact();
+                    expect( newContact ).to.be.an.instanceOf( NewContact );
                 });
             });
         });

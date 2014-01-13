@@ -58,11 +58,12 @@ module.exports = function (grunt) {
                     'Gruntfile.js',
                     '<%= yeoman.app %>/scripts/{,**/}*.js',
                     '!<%= yeoman.app %>/scripts/vendor/*',
-                    'test/spec/{,*/}*.js'
+                    'test/{,**/}*.js'
                 ],
                 tasks: ['exec', 'jshint:all'],
                 options: {
-                    livereload: true
+                    livereload: true,
+                    force: true
                 }
             }
 
@@ -115,7 +116,7 @@ module.exports = function (grunt) {
                 'Gruntfile.js',
                 '<%= yeoman.app %>/scripts/{,**/}*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                'test/spec/{,**/}*.js'
             ]
         },
 

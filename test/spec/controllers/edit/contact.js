@@ -6,13 +6,8 @@
     root.define([
             'controllers/edit/contact'
         ],
-        function( EditContact ) {
+        function( editContact ) {
             describe('EditContact Controller', function () {
-
-                it('should be an instance of EditContact Controller', function () {
-                    var edit/contact = new EditContact();
-                    expect( edit/contact ).to.be.an.instanceOf( EditContact );
-                });
             });
         });
 

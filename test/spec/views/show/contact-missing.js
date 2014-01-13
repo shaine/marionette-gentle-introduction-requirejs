@@ -4,15 +4,15 @@
     var root = this;
 
     root.define([
-            'views/item/contact-missing'
+            'views/show/contact-missing'
         ],
         function( ContactMissing ) {
 
             describe('ContactMissing Itemview', function () {
 
                 it('should be an instance of ContactMissing Itemview', function () {
-                    var contact-missing = new ContactMissing();
-                    expect( contact-missing ).to.be.an.instanceOf( ContactMissing );
+                    var contactMissing = new ContactMissing();
+                    expect( contactMissing ).to.be.an.instanceOf( ContactMissing );
                 });
             });
 

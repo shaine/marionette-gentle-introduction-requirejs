@@ -10,7 +10,9 @@
             describe('Dialog Region', function () {
 
                 it('should be an instance of Dialog Region', function () {
-                    var dialog = new Dialog();
+                    var dialog = new Dialog({
+                        el: 'body'
+                    });
                     expect( dialog ).to.be.an.instanceOf( Dialog );
                 });
             });
