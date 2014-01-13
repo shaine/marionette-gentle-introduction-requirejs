@@ -5,10 +5,10 @@ define([
     'models/contact',
     'collections/contact',
     'regions/dialog',
-    'routers/router'
+    'routers/contact-router'
 ],
 
-function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, router ) {
+function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, ContactRouter ) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();

@@ -21,7 +21,7 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
             console.log('initialize a Contact Controller');
         },
 
-        listContacts: function() {
+        listContacts: function(criterion) {
             var loadingView = new LoadingView();
             Communicator.mediator.trigger('app:show', loadingView);
 
@@ -46,6 +46,13 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
                         };
                     }
                 });
+
+                if (criterion) {
+                    filteredContacts.filter(criterion);
+                    panelView.once('show', function() {
+                        panelView.triggerMethod('set:filter:criterion', criterion);
+                    });
+                }
 
                 var contactCollectionView = new ContactCollectionView({
                     collection: filteredContacts
@@ -85,6 +92,7 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
 
                     panelView.on('contacts:filter', function(filterCriterion) {
                         filteredContacts.filter(filterCriterion);
+                        Communicator.mediator.trigger('contacts:filter', filterCriterion);
                     });
                 });
 

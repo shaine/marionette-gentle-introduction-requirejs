@@ -15,7 +15,9 @@ function( Backbone, PanelViewTmpl  ) {
         template: PanelViewTmpl,
 
         /* ui selector cache */
-        ui: {},
+        ui: {
+            criterion: 'input.js-filter-criterion'
+        },
 
         /* Ui events hash */
         triggers: {
@@ -30,6 +32,10 @@ function( Backbone, PanelViewTmpl  ) {
             e.preventDefault();
             var criterion = this.$('.js-filter-criterion').val();
             this.trigger('contacts:filter', criterion);
+        },
+
+        onSetFilterCriterion: function(criterion) {
+            this.ui.criterion.val(criterion);
         },
 
         /* on render callback */
