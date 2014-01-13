@@ -6,14 +6,20 @@ define([
     'controllers/show/contact',
     'controllers/edit/contact'
 ],
-function(Backbone, Marionette, Communicator, contactController, contactShowController, contactEditController) {
+function(Backbone, Marionette, Communicator, ContactController, ContactShowController, ContactEditController) {
     'use strict';
 
     return Marionette.AppRouter.extend({
         initialize: function(option) {
+            var self = this;
+
+            this.contactController = new ContactController();
+            this.contactShowController = new ContactShowController();
+            this.contactEditController = new ContactEditController();
+
             Communicator.mediator.on('contacts:list', function() {
                 Backbone.history.navigate('contacts');
-                this.controller.listContacts();
+                self.listContacts();
             });
 
             Communicator.mediator.on('contacts:filter', function(criterion) {
@@ -26,31 +32,29 @@ function(Backbone, Marionette, Communicator, contactController, contactShowContr
 
             Communicator.mediator.on('contact:show', function(id) {
                 Backbone.history.navigate('contacts/'+id);
-                this.controller.showContact(id);
+                self.showContact(id);
             });
 
             Communicator.mediator.on('contact:edit', function(id) {
                 Backbone.history.navigate('contacts/'+id+'/edit');
-                this.controller.editContact(id);
+                self.editContact(id);
             });
         },
 
-        appRoutes: {
+        routes: {
             'contacts(/filter/criterion::criterion)': 'listContacts',
             'contacts/:id': 'showContact',
             'contacts/:id/edit': 'editContact'
         },
 
-        controller: {
-            listContacts: function(criterion) {
-                contactController.listContacts(criterion);
-            },
-            showContact: function(id) {
-                contactShowController.showContact(id);
-            },
-            editContact: function(id) {
-                contactEditController.editContact(id);
-            }
+        listContacts: function(criterion) {
+            this.contactController.listContacts(criterion);
+        },
+        showContact: function(id) {
+            this.contactShowController.showContact(id);
+        },
+        editContact: function(id) {
+            this.contactEditController.editContact(id);
         }
     });
 });

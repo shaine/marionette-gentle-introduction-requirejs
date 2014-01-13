@@ -8,7 +8,7 @@ define([
 function( Backbone, Communicator, ContactShowView, ContactMissingShowView, LoadingView ) {
     'use strict';
 
-    return new (Backbone.Marionette.Controller.extend({
+    return Backbone.Marionette.Controller.extend({
         showContact: function(id) {
             var loadingView = new LoadingView({
                 title: 'Artificial Loading Delay',
@@ -35,6 +35,6 @@ function( Backbone, Communicator, ContactShowView, ContactMissingShowView, Loadi
                 Communicator.mediator.trigger('app:show', contactShowView);
             });
         }
-    }))();
+    });
 
 });

@@ -8,7 +8,7 @@ define([
 function( Backbone, Communicator, ContactEditView, ContactMissingShowView, LoadingView ) {
     'use strict';
 
-    return new (Backbone.Marionette.Controller.extend({
+    return Backbone.Marionette.Controller.extend({
         editContact: function(id) {
             var loadingView = new LoadingView({
                 title: 'Preparing to Edit',
@@ -40,6 +40,6 @@ function( Backbone, Communicator, ContactEditView, ContactMissingShowView, Loadi
                 Communicator.mediator.trigger('app:show', contactEditView);
             });
         }
-    }))();
+    });
 
 });

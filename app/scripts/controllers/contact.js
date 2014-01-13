@@ -12,10 +12,10 @@ define([
     'communicator',
     'entities/filter'
 ],
-function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, Contact, contactShowController, Communicator, Filter ) {
+function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, Contact, ContactShowController, Communicator, Filter ) {
     'use strict';
 
-    return new (Backbone.Marionette.Controller.extend({
+    return Backbone.Marionette.Controller.extend({
 
         initialize: function( options ) {
             console.log('initialize a Contact Controller');
@@ -101,8 +101,6 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
                 });
 
                 contactCollectionView.on('itemview:contact:show', function(childView, model){
-                    contactShowController.showContact(model.get('id'));
-
                     Communicator.mediator.trigger('contact:show', model.get('id'));
                 });
 
@@ -127,6 +125,6 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
                 Communicator.mediator.trigger('app:show', contactListLayoutView);
             });
         }
-    }))();
+    });
 
 });
