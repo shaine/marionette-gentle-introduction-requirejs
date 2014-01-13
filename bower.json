@@ -17,7 +17,8 @@
     "sinon": "~1.7.3",
     "bootstrap": "~3.0.3",
     "html5-boilerplate": "~4.3.0",
-    "lesshat": "~2.0.13"
+    "lesshat": "~2.0.13",
+    "backbone.picky": "~0.2.0"
   },
   "devDependencies": {},
   "directory": "bower_components"
