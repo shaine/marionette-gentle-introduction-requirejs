@@ -8,6 +8,7 @@ define(function() {
             'spec/controllers/contact.js',
             'spec/controllers/edit/contact.js',
             'spec/models/contact.js',
+            'spec/regions/dialog.js',
             'spec/routers/router.js',
             'spec/test-suite.js',
             'spec/views/composite/contact.js',
@@ -15,6 +16,7 @@ define(function() {
             'spec/views/item/contact-missing.js',
             'spec/views/item/contact.js',
             'spec/views/item/edit/contact.js',
+            'spec/views/item/new/contact.js',
             'spec/views/item/panel.js',
             'spec/views/layout/contact-list.js',
             'spec/views/loading.js'

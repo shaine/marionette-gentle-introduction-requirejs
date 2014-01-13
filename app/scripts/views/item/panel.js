@@ -18,7 +18,9 @@ function( Backbone, PanelViewTmpl  ) {
         ui: {},
 
         /* Ui events hash */
-        events: {},
+        triggers: {
+            'click button.js-new': 'contact:new'
+        },
 
         /* on render callback */
         onRender: function() {}

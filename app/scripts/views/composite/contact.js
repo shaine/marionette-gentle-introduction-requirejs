@@ -26,7 +26,13 @@ function( Backbone, ContactItemView, ContactCollectionViewTmpl ) {
         events: {},
 
         /* on render callback */
-        onRender: function() {}
+        onRender: function() {},
+
+        onCompositeCollectionRendered: function() {
+            this.appendHtml = function(collectionView, itemView, index) {
+                collectionView.$el.prepend(itemView.el);
+            };
+        }
     });
 
 });

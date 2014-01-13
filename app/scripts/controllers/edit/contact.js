@@ -22,6 +22,7 @@ function( Backbone, Communicator, ContactEditView, ContactMissingShowView, Loadi
 
                 if (typeof contact !== 'undefined') {
                     contactEditView = new ContactEditView({
+                        generateTitle: true,
                         model: contact
                     });
 

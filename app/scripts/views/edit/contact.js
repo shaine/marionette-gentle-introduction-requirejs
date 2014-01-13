@@ -1,77 +1,25 @@
 define([
-    'backbone',
-    'backbone.syphon',
-    'underscore',
-    'hbs!tmpl/edit/contact'
+    'views/item/_form'
 ],
-function( Backbone, Syphon, _, EditContactTmpl ) {
+function( FormView ) {
     'use strict';
 
     /* Return a ItemView class definition */
-    return Backbone.Marionette.ItemView.extend({
+    return FormView.extend({
 
         initialize: function() {
             console.log('initialize a EditContact ItemView');
             this.title = 'Edit ' + this.model.get('firstName') + ' ' + this.model.get('lastName');
         },
 
-        template: EditContactTmpl,
-
-
-        /* ui selector cache */
-        ui: {},
-
-        /* Ui events hash */
-        events: {
-            'click button.js-submit': 'submitClicked'
-        },
-
         /* on render callback */
         onRender: function() {
-            if (!this.options.asModal) {
-                this.$h1 = $('<h1>', {text: this.title});
-                this.$el.prepend(this.$h1);
+            if (this.options.generateTitle) {
+                var $title = $('<h1>', {text: this.title});
+                this.$el.prepend($title);
             }
-        },
 
-        onShow: function() {
-            if (this.options.asModal) {
-                this.$el.dialog({
-                    modal: true,
-                    title: this.title,
-                    width: 'auto'
-                });
-            }
-        },
-
-        submitClicked: function(e) {
-            e.preventDefault();
-            var data = Syphon.serialize(this);
-            this.trigger('form:submit', data);
-        },
-
-        onFormDataInvalid: function(errors) {
-            var $view = this.$el;
-
-            var clearFormErrors = function() {
-                var $form = $view.find('form');
-                $form.find('.help-inline.error').each(function() {
-                    $(this).remove();
-                });
-                $form.find('.control-group.error').each(function() {
-                    $(this).removeClass('error');
-                });
-            };
-
-            var markErrors = function(value, key) {
-                var $controlGroup = $view.find('#contact-' + key).parent();
-                var $errorEl = $('<span>', { class: 'help-inline error', text: value });
-                $controlGroup.append($errorEl).addClass('error');
-            };
-
-            clearFormErrors();
-            _.each(errors, markErrors);
+            this.$('.js-submit').text('Update Contact');
         }
     });
-
 });

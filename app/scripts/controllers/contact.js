@@ -2,14 +2,16 @@ define([
     'backbone',
     'jquery',
     'views/composite/contact',
+    'views/item/new/contact',
     'views/edit/contact',
     'views/loading',
     'views/layout/contact-list',
     'views/item/panel',
+    'models/contact',
     'controllers/show/contact',
     'communicator'
 ],
-function( Backbone, $, ContactCollectionView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, contactShowController, Communicator ) {
+function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, Contact, contactShowController, Communicator ) {
     'use strict';
 
     return new (Backbone.Marionette.Controller.extend({
@@ -35,6 +37,31 @@ function( Backbone, $, ContactCollectionView, ContactEditView, LoadingView, Cont
                 contactListLayoutView.on('show', function() {
                     contactListLayoutView.panelRegion.show(panelView);
                     contactListLayoutView.contactsRegion.show(contactCollectionView);
+                    panelView.on('contact:new', function() {
+                        var model = new Contact();
+                        var view = new ContactNewView({
+                            model: model
+                        });
+
+                        view.on('form:submit', function(data) {
+                            if (contacts.length > 0) {
+                                var heighestId = contacts.max(function(c) { return c.id; }).get('id');
+                                data.id = heighestId + 1;
+                            } else {
+                                data.id = 1;
+                            }
+
+                            if (model.save(data)) {
+                                contacts.add(model);
+                                view.trigger('dialog:close');
+                                contactCollectionView.children.findByModel(model).flash('success');
+                            } else {
+                                view.triggerMethod('form:data:invalid', model.validationError);
+                            }
+                        });
+
+                        Communicator.mediator.trigger('app:dialog', view);
+                    });
                 });
 
                 contactCollectionView.on('itemview:contact:delete', function(childView, model){
@@ -49,14 +76,13 @@ function( Backbone, $, ContactCollectionView, ContactEditView, LoadingView, Cont
 
                 contactCollectionView.on('itemview:contact:edit', function(childView, model) {
                     var view = new ContactEditView({
-                        model: model,
-                        asModal: true
+                        model: model
                     });
 
                     view.on('form:submit', function(data) {
                         if (model.save(data)) {
                             childView.render();
-                            Communicator.mediator.trigger('app:dialog:close');
+                            view.trigger('dialog:close');
                             childView.flash('success');
                         } else {
                             view.triggerMethod('form:data:invalid', model.validationError);

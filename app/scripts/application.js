@@ -1,12 +1,14 @@
 define([
     'backbone',
+    'underscore',
     'communicator',
     'models/contact',
     'collections/contact',
+    'regions/dialog',
     'routers/router'
 ],
 
-function( Backbone, Communicator, Contact, ContactCollection, router ) {
+function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, router ) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();
@@ -14,7 +16,9 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
     /* Add application regions here */
     App.addRegions({
         mainRegion: '#main-region',
-        dialogRegion: '#dialog-region'
+        dialogRegion: ContactRegion.extend({
+            el: '#dialog-region'
+        })
     });
 
     App.navigate = function(route, options){
@@ -30,6 +34,42 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
 
     /* Add initializers here */
     App.addInitializer( function () {
+        // Add a shift+click debugging tool to views
+        var delegateEvents = Backbone.View.prototype.delegateEvents;
+        Backbone.View.prototype.delegateEvents = function(a) {
+            var _this = this;
+            this.$el.on('click', function(e) {
+                if (e.shiftKey) {
+                    // Store all of the views we debug
+                    if (typeof window.debuggedViews === 'undefined') {
+                        window.debuggedViews = _([]);
+                    }
+                    window.debuggedViews.push(_this);
+
+                    // Dump this view into the console
+                    console.log(
+                        'var ' + _this.cid + ' = debuggedViews.last() ',
+                        window.debuggedViews.last()
+                    );
+
+                    // Add a reference to this view object to the window
+                    // namespace so we can play around with it interactively
+                    window[_this.cid] = _this;
+
+                    // STAHP
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+
+            // Call the original delegateEvents() function from the context
+            // of this object
+            delegateEvents.call(this, a);
+        };
+
         var contacts;
 
         var initializeContacts = function(){
@@ -102,10 +142,6 @@ function( Backbone, Communicator, Contact, ContactCollection, router ) {
 
         Communicator.mediator.on('app:dialog', function(view) {
             App.dialogRegion.show(view);
-        });
-
-        Communicator.mediator.on('app:dialog:close', function(view) {
-            App.dialogRegion.close();
         });
     });
 

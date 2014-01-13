@@ -12,7 +12,11 @@ function( Backbone, LocalStorage, _ ) {
             console.log('initialize a Contact model');
         },
 
-        defaults: {},
+        defaults: {
+            firstName: '',
+            lastName: '',
+            phoneNumber: ''
+        },
 
         urlRoot: 'contacts',
 
