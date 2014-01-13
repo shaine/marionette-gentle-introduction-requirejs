@@ -9,7 +9,7 @@ define([
     'routers/about-router'
 ],
 
-function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, ContactRouter, aboutRouter ) {
+function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, ContactRouter, AboutRouter ) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();
@@ -36,6 +36,7 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
     /* Add initializers here */
     App.addInitializer( function() {
         var contactRouter = new ContactRouter();
+        var aboutRouter = new AboutRouter();
 
         // Add a shift+click debugging tool to views
         var delegateEvents = Backbone.View.prototype.delegateEvents;
