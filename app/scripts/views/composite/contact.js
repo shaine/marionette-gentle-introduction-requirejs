@@ -1,9 +1,10 @@
 define([
     'backbone',
     'views/item/contact',
+    'views/item/empty',
     'hbs!tmpl/composite/contact'
 ],
-function( Backbone, ContactItemView, ContactCollectionViewTmpl ) {
+function( Backbone, ContactItemView, NoContactItemView, ContactCollectionViewTmpl ) {
     'use strict';
 
     /* Return a ItemView class definition */
@@ -18,6 +19,7 @@ function( Backbone, ContactItemView, ContactCollectionViewTmpl ) {
         itemView: ContactItemView,
         itemViewContainer: 'tbody',
         template: ContactCollectionViewTmpl,
+        emptyView: NoContactItemView,
 
         /* ui selector cache */
         ui: {},

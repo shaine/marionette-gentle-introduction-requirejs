@@ -22,6 +22,16 @@ function( Backbone, PanelViewTmpl  ) {
             'click button.js-new': 'contact:new'
         },
 
+        events: {
+            'submit #filter-form': 'filterContacts'
+        },
+
+        filterContacts: function(e) {
+            e.preventDefault();
+            var criterion = this.$('.js-filter-criterion').val();
+            this.trigger('contacts:filter', criterion);
+        },
+
         /* on render callback */
         onRender: function() {}
     });

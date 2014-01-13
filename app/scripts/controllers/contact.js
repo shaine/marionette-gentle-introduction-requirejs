@@ -9,9 +9,10 @@ define([
     'views/item/panel',
     'models/contact',
     'controllers/show/contact',
-    'communicator'
+    'communicator',
+    'entities/filter'
 ],
-function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, Contact, contactShowController, Communicator ) {
+function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, LoadingView, ContactListLayoutView, PanelView, Contact, contactShowController, Communicator, Filter ) {
     'use strict';
 
     return new (Backbone.Marionette.Controller.extend({
@@ -30,8 +31,24 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
             var panelView = new PanelView();
 
             $.when(fetchingContacts).done(function(contacts) {
+                var filteredContacts = Filter.filterContacts({
+                    collection: contacts,
+                    filterFunction: function(filterCriterion) {
+                        var criterion = filterCriterion.toLowerCase();
+                        return function(contact) {
+                            if (
+                                contact.get('firstName').toLowerCase().indexOf(criterion) !== -1 ||
+                                contact.get('lastName').toLowerCase().indexOf(criterion) !== -1 ||
+                                contact.get('phoneNumber').toLowerCase().indexOf(criterion) !== -1
+                            ) {
+                                return contact;
+                            }
+                        };
+                    }
+                });
+
                 var contactCollectionView = new ContactCollectionView({
-                    collection: contacts
+                    collection: filteredContacts
                 });
 
                 contactListLayoutView.on('show', function() {
@@ -54,13 +71,20 @@ function( Backbone, $, ContactCollectionView, ContactNewView, ContactEditView, L
                             if (model.save(data)) {
                                 contacts.add(model);
                                 view.trigger('dialog:close');
-                                contactCollectionView.children.findByModel(model).flash('success');
+                                var newContactView = contactListLayoutView.children.findByModel(model);
+                                if (newContactView) {
+                                    newContactView.flash('success');
+                                }
                             } else {
                                 view.triggerMethod('form:data:invalid', model.validationError);
                             }
                         });
 
                         Communicator.mediator.trigger('app:dialog', view);
+                    });
+
+                    panelView.on('contacts:filter', function(filterCriterion) {
+                        filteredContacts.filter(filterCriterion);
                     });
                 });
 
