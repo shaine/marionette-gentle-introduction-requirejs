@@ -9,7 +9,32 @@ define([
 function(Backbone, Marionette, Communicator, contactController, contactShowController, contactEditController) {
     'use strict';
 
-    var router = new (Marionette.AppRouter.extend({
+    return Marionette.AppRouter.extend({
+        initialize: function(option) {
+            Communicator.mediator.on('contacts:list', function() {
+                Backbone.history.navigate('contacts');
+                this.controller.listContacts();
+            });
+
+            Communicator.mediator.on('contacts:filter', function(criterion) {
+                if (criterion) {
+                    Backbone.history.navigate('contacts/filter/criterion:' + criterion);
+                } else {
+                    Backbone.history.navigate('contacts');
+                }
+            });
+
+            Communicator.mediator.on('contact:show', function(id) {
+                Backbone.history.navigate('contacts/'+id);
+                this.controller.showContact(id);
+            });
+
+            Communicator.mediator.on('contact:edit', function(id) {
+                Backbone.history.navigate('contacts/'+id+'/edit');
+                this.controller.editContact(id);
+            });
+        },
+
         appRoutes: {
             'contacts(/filter/criterion::criterion)': 'listContacts',
             'contacts/:id': 'showContact',
@@ -27,30 +52,5 @@ function(Backbone, Marionette, Communicator, contactController, contactShowContr
                 contactEditController.editContact(id);
             }
         }
-    }))();
-
-    Communicator.mediator.on('contacts:list', function() {
-        Backbone.history.navigate('contacts');
-        router.controller.listContacts();
     });
-
-    Communicator.mediator.on('contacts:filter', function(criterion) {
-        if (criterion) {
-            Backbone.history.navigate('contacts/filter/criterion:' + criterion);
-        } else {
-            Backbone.history.navigate('contacts');
-        }
-    });
-
-    Communicator.mediator.on('contact:show', function(id) {
-        Backbone.history.navigate('contacts/'+id);
-        router.controller.showContact(id);
-    });
-
-    Communicator.mediator.on('contact:edit', function(id) {
-        Backbone.history.navigate('contacts/'+id+'/edit');
-        router.controller.editContact(id);
-    });
-
-    return router;
 });
