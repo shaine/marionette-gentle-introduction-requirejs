@@ -49,12 +49,15 @@ function(Backbone, Marionette, Communicator, ContactController, ContactShowContr
 
         listContacts: function(criterion) {
             this.contactController.listContacts(criterion);
+            Communicator.command.execute('set:active:header', 'contacts');
         },
         showContact: function(id) {
             this.contactShowController.showContact(id);
+            Communicator.command.execute('set:active:header', 'contacts');
         },
         editContact: function(id) {
             this.contactEditController.editContact(id);
+            Communicator.command.execute('set:active:header', 'contacts');
         }
     });
 });

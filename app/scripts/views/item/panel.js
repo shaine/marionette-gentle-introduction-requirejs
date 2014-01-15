@@ -2,7 +2,7 @@ define([
     'backbone',
     'hbs!tmpl/item/panel'
 ],
-function( Backbone, PanelViewTmpl  ) {
+function(Backbone, PanelViewTmpl) {
     'use strict';
 
     /* Return a ItemView class definition */

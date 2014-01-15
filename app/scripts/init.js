@@ -3,7 +3,7 @@ require.config({
     baseUrl: '/scripts',
 
     /* starting point for application */
-    deps: ['backbone.marionette', 'backbone.localstorage', 'backbone.syphon', 'spin', 'jquery.spin', 'jquery.ui', 'bootstrap', 'main'],
+    deps: ['backbone.marionette', 'backbone.localstorage', 'backbone.syphon', 'backbone.picky', 'spin', 'jquery.spin', 'jquery.ui', 'bootstrap', 'main'],
 
 
     shim: {

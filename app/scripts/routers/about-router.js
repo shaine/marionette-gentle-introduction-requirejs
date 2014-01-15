@@ -25,6 +25,7 @@ function(Backbone, Marionette, Communicator, AboutController) {
 
         showAbout: function() {
             this.aboutController.showAbout();
+            Communicator.command.execute('set:active:header', 'about');
         }
     });
 });

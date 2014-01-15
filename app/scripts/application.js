@@ -4,18 +4,21 @@ define([
     'communicator',
     'models/contact',
     'collections/contact',
+    'collections/headers',
     'regions/dialog',
     'routers/contact-router',
-    'routers/about-router'
+    'routers/about-router',
+    'controllers/header'
 ],
 
-function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, ContactRouter, AboutRouter ) {
+function( Backbone, _, Communicator, Contact, ContactCollection, HeaderCollection, ContactRegion, ContactRouter, AboutRouter, HeaderController ) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();
 
     /* Add application regions here */
     App.addRegions({
+        headerRegion: '#header-region',
         mainRegion: '#main-region',
         dialogRegion: ContactRegion.extend({
             el: '#dialog-region'
@@ -37,6 +40,7 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
     App.addInitializer( function() {
         var contactRouter = new ContactRouter();
         var aboutRouter = new AboutRouter();
+        var headerController = new HeaderController();
 
         // Add a shift+click debugging tool to views
         var delegateEvents = Backbone.View.prototype.delegateEvents;
@@ -75,6 +79,7 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
         };
 
         var contacts;
+        var headers;
 
         var initializeContacts = function(){
             var contacts = new ContactCollection([
@@ -88,6 +93,15 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
             });
 
             return contacts.models;
+        };
+
+        var initializeHeaders = function() {
+            var headers = new HeaderCollection([
+                { name: 'Contacts', url: 'contacts', navigationTrigger: 'contacts:list' },
+                { name: 'About', url: 'about', navigationTrigger: 'about:show' }
+            ]);
+
+            return headers;
         };
 
         var API = {
@@ -110,7 +124,6 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
                     }
                 });
 
-
                 return defer.promise();
             },
 
@@ -129,6 +142,13 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
                 }, 2000);
 
                 return defer.promise();
+            },
+
+            getHeaders: function() {
+                if(headers === undefined){
+                    headers = initializeHeaders();
+                }
+                return headers;
             }
         };
 
@@ -140,6 +160,10 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
             return API.getContactEntity(id);
         });
 
+        Communicator.reqres.setHandler('header:links', function(id) {
+            return API.getHeaders();
+        });
+
         Communicator.mediator.on('app:show', function(view) {
             App.mainRegion.show(view);
         });
@@ -147,6 +171,16 @@ function( Backbone, _, Communicator, Contact, ContactCollection, ContactRegion, 
         Communicator.mediator.on('app:dialog', function(view) {
             App.dialogRegion.show(view);
         });
+
+        Communicator.mediator.on('app:header', function(view) {
+            App.headerRegion.show(view);
+        });
+
+        Communicator.command.setHandler('set:active:header', function(name) {
+            headerController.setActiveHeader(name);
+        });
+
+        headerController.listHeader();
     });
 
     App.on('initialize:after', function() {
